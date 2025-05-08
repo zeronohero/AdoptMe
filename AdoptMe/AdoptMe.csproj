@@ -46,6 +46,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="systemCS\FormManager.cs" />
+    <Compile Include="uiAdmin\ManageAnimal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="uiAdmin\ManageAnimal.Designer.cs">
+      <DependentUpon>ManageAnimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uiAdoptee\AdopteeDash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="uiAdoptee\AdopteeDash.Designer.cs">
+      <DependentUpon>AdopteeDash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uiAdmin\AdminDash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="uiAdmin\AdminDash.Designer.cs">
+      <DependentUpon>AdminDash.cs</DependentUpon>
+    </Compile>
     <Compile Include="objectDB\Admin.cs" />
     <Compile Include="objectDB\Adoptee.cs" />
     <Compile Include="objectDB\AdoptionRequest.cs" />
@@ -74,6 +93,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="uiAdmin\AdminDash.resx">
+      <DependentUpon>AdminDash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uiAdmin\ManageAnimal.resx">
+      <DependentUpon>ManageAnimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uiAdoptee\AdopteeDash.resx">
+      <DependentUpon>AdopteeDash.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -86,6 +114,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="image\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

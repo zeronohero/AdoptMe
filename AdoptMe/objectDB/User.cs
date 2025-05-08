@@ -21,8 +21,7 @@ namespace AdoptMe
         public Role IsRole { get; set; }
         public string Name { get; set; }
         public string Number { get; set; }
-        public string Address { get; set; } 
-
+        public string Address { get; set; }
         public User(int id, string email, string password, Role isRole, string name, string number, string address)
         {
             this.Id = id;

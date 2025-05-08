@@ -36,11 +36,11 @@ namespace AdoptMe
 
             if (user.IsRole == User.Role.Admin)
             {
-                MessageBox.Show("Welcome Admin!");
+                FormManager.ShowForm(new AdminDash());
             }
             else
             {
-                MessageBox.Show("Welcome Adoptee!");
+                FormManager.ShowForm(new AdopteeDash());
             }
 
             this.Hide();

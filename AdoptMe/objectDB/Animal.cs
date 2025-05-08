@@ -21,10 +21,13 @@ namespace AdoptMe
 
         public Animal
             (
-            string name, string species, 
-            string color, int age, 
-            string gender, string status, 
-            int admin_id, int? adoptedBy
+            string name, 
+            string species, 
+            string color, 
+            int age, 
+            string gender, 
+            string status, 
+            int admin_id
             )
         {
             Name = name;
@@ -34,13 +37,12 @@ namespace AdoptMe
             Gender = gender;
             Status = status;
             Admin_id = admin_id;
-            AdoptedBy = adoptedBy;
         }
 
         public void SaveToDatabase()
         {
             string query = @"INSERT INTO Animal 
-                (name, species, color, age, gender, status, admin_id, adoptee_id)
+                (name, species, color, age, gender, status, admin_id)
                 VALUES (@name, @species, @color, @age, @gender, @status, @admin_id)";
 
             SqlParameter[] parameters = new SqlParameter[]
