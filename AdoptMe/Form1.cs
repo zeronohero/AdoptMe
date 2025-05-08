@@ -43,7 +43,7 @@ namespace AdoptMe
                 FormManager.ShowForm(new AdopteeDash());
             }
 
-            this.Hide();
+            this.Close();
         }
 
     }
