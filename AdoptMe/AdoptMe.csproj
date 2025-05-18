@@ -47,11 +47,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="systemCS\FormManager.cs" />
-    <Compile Include="uiAdmin\ManageAnimal.cs">
+    <Compile Include="uiAdmin\AdminDash.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="uiAdmin\ManageAnimal.Designer.cs">
-      <DependentUpon>ManageAnimal.cs</DependentUpon>
+    <Compile Include="uiAdmin\AdminDash.Designer.cs">
+      <DependentUpon>AdminDash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uiAdmin\Pets\ManagePets_Pop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="uiAdmin\Pets\ManagePets_Pop.Designer.cs">
+      <DependentUpon>ManagePets_Pop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uiAdmin\Request\ManageRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="uiAdmin\Request\ManageRequest.Designer.cs">
+      <DependentUpon>ManageRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uiAdmin\Reports\ManageReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="uiAdmin\Reports\ManageReports.Designer.cs">
+      <DependentUpon>ManageReports.cs</DependentUpon>
     </Compile>
     <Compile Include="uiAdoptee\AdopteeDash.cs">
       <SubType>Form</SubType>
@@ -59,11 +77,11 @@
     <Compile Include="uiAdoptee\AdopteeDash.Designer.cs">
       <DependentUpon>AdopteeDash.cs</DependentUpon>
     </Compile>
-    <Compile Include="uiAdmin\AdminDash.cs">
+    <Compile Include="uiAdmin\Pets\ManagePets.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="uiAdmin\AdminDash.Designer.cs">
-      <DependentUpon>AdminDash.cs</DependentUpon>
+    <Compile Include="uiAdmin\Pets\ManagePets.Designer.cs">
+      <DependentUpon>ManagePets.cs</DependentUpon>
     </Compile>
     <Compile Include="objectDB\Admin.cs" />
     <Compile Include="objectDB\Adoptee.cs" />
@@ -93,11 +111,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="uiAdmin\Pets\ManagePets.resx">
+      <DependentUpon>ManagePets.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="uiAdmin\AdminDash.resx">
       <DependentUpon>AdminDash.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="uiAdmin\ManageAnimal.resx">
-      <DependentUpon>ManageAnimal.cs</DependentUpon>
+    <EmbeddedResource Include="uiAdmin\Pets\ManagePets_Pop.resx">
+      <DependentUpon>ManagePets_Pop.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="uiAdoptee\AdopteeDash.resx">
       <DependentUpon>AdopteeDash.cs</DependentUpon>

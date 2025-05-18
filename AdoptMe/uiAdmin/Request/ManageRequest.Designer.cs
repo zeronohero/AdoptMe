@@ -1,6 +1,6 @@
-﻿namespace AdoptMe
+﻿namespace AdoptMe.uiAdmin
 {
-    partial class AdopteeDash
+    partial class ManageRequest
     {
         /// <summary>
         /// Required designer variable.
@@ -28,33 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(290, 158);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(153, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Adoptee Dashboard";
-            // 
-            // AdopteeDash
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label1);
-            this.Name = "AdopteeDash";
-            this.Text = "AdopteeDash";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            this.Text = "ManageRequest";
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AdoptMe.systemCS;
+using AdoptMe.uiAdmin;
 using static AdoptMe.User;
 
 namespace AdoptMe
@@ -43,7 +44,7 @@ namespace AdoptMe
                 FormManager.ShowForm(new AdopteeDash());
             }
 
-            this.Close();
+            this.Hide();
         }
 
     }

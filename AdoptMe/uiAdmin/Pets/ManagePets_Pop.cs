@@ -12,9 +12,9 @@ using AdoptMe.systemCS;
 
 namespace AdoptMe.uiAdmin
 {
-    public partial class ManageAnimal : Form
+    public partial class ManagePets_Pop : Form
     {
-        public ManageAnimal()
+        public ManagePets_Pop()
         {
             InitializeComponent();
         }

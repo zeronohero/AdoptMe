@@ -1,6 +1,6 @@
 ﻿namespace AdoptMe.uiAdmin
 {
-    partial class ManageAnimal
+    partial class ManagePets_Pop
     {
         /// <summary>
         /// Required designer variable.
