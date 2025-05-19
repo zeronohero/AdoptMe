@@ -15,9 +15,9 @@ namespace AdoptMe.uiAdmin
         public AdminDash()
         {
             InitializeComponent();
-            this.FormClosed += AdminDash_FormClosed;
+            this.FormClosed += Closed;
         }
-        private void AdminDash_FormClosed(object sender, FormClosedEventArgs e)
+        private void Closed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }

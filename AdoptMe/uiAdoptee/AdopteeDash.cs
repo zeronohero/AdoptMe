@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using AdoptMe.uiAdoptee;
 
 namespace AdoptMe
 {
@@ -15,6 +9,27 @@ namespace AdoptMe
         public AdopteeDash()
         {
             InitializeComponent();
+            this.FormClosed += Closed;
+        }
+
+        private void LoadFormInPanel(Form form)
+        {
+            panel4.Controls.Clear();
+            form.TopLevel = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.Dock = DockStyle.Fill;
+            panel4.Controls.Add(form);
+            form.Show();
+        }
+        private void Closed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoadFormInPanel(new PetLists());
+
         }
     }
 }

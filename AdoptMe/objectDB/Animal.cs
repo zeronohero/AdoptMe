@@ -15,22 +15,22 @@ namespace AdoptMe
         public string Species { get; set; }
         public string Color { get; set; }
         public int Age { get; set; }
-        public string Gender { get; set; } // 'male' or 'female'
-        public string Status { get; set; } // 'adopted' or 'not_adopted'
-        public int Admin_id { get; set; } // Admin ID
-        public int? Adoptee_id { get; set; } // Adoptee ID or null
+        public string Gender { get; set; } // 'male' or 'female'  
+        public string Status { get; set; } // 'adopted' or 'not_adopted'  
+        public int Admin_id { get; set; } // Admin ID  
+        public int? Adoptee_id { get; set; } // Adoptee ID or null  
+        public string Image { get; set; }
 
-        public Animal // WARNING: Database Insert only 
-            //dont need to implicitly insert an id
-            (
-            string name, 
-            string species, 
-            string color, 
-            int age, 
-            string gender, 
-            string status, 
-            int admin_id
-            )
+        public Animal(
+            string name,
+            string species,
+            string color,
+            int age,
+            string gender,
+            string status,
+            int admin_id,
+            string image // nullable
+        )
         {
             Name = name;
             Species = species;
@@ -39,9 +39,10 @@ namespace AdoptMe
             Gender = gender;
             Status = status;
             Admin_id = admin_id;
+            Image = image;
         }
 
-        public Animal // Complete Detail
+        public Animal // Complete Detail  
             (
             int animal_id,
             string name,
@@ -51,7 +52,7 @@ namespace AdoptMe
             string gender,
             string status,
             int admin_id,
-            int ? adoptee_id
+            int? adoptee_id
             )
         {
             Animal_id = animal_id;
@@ -67,26 +68,26 @@ namespace AdoptMe
 
         public void SaveToDatabase()
         {
-            string query = @"INSERT INTO Animal 
-                (name, species, color, age, gender, status, admin_id)
-                VALUES (@name, @species, @color, @age, @gender, @status, @admin_id)";
+            string query = @"INSERT INTO Animal   
+                   (name, species, color, age, gender, status, admin_id)  
+                   VALUES (@name, @species, @color, @age, @gender, @status, @admin_id)";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@name", Name),
-                new SqlParameter("@species", Species),
-                new SqlParameter("@color", Color),
-                new SqlParameter("@age", Age),
-                new SqlParameter("@gender", Gender),
-                new SqlParameter("@status", Status),
-                new SqlParameter("@admin_id", Admin_id),
+                   new SqlParameter("@name", Name),
+                   new SqlParameter("@species", Species),
+                   new SqlParameter("@color", Color),
+                   new SqlParameter("@age", Age),
+                   new SqlParameter("@gender", Gender),
+                   new SqlParameter("@status", Status),
+                   new SqlParameter("@admin_id", Admin_id),
             };
             DatabaseConnection.ExecuteNonQuery(query, parameters);
         }
         public static List<Animal> GetAllAnimals()
         {
             List<Animal> animals = new List<Animal>();
-            SqlParameter[] parameters = new SqlParameter[]{};
+            SqlParameter[] parameters = new SqlParameter[] { };
             string query = "SELECT animal_id, name, species, color, age, gender, status, admin_id, adoptee_id FROM Animal";
             using (SqlDataReader reader = DatabaseConnection.ExecuteReader(query, parameters))
             {

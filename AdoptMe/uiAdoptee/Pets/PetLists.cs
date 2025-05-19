@@ -7,25 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AdoptMe.uiAdmin;
 
-namespace AdoptMe
+namespace AdoptMe.uiAdoptee
 {
-    public partial class ManagePets : Form
+    public partial class PetLists : Form
     {
-        List<Animal> animals;
-        public ManagePets()
+        List<Animal> animals = new List<Animal>();
+        public PetLists()
         {
             InitializeComponent();
             loadAnimals();
             PopulateAnimalPanels();
         }
-
         private void loadAnimals()
         {
             animals = Animal.GetAllAnimals();
+            animals.Where(a => a.Status.Contains("not_adopted"));
         }
-
 
         private void PopulateAnimalPanels()
         {
@@ -41,7 +39,7 @@ namespace AdoptMe
                     Height = 200,
                     BorderStyle = BorderStyle.FixedSingle
                 };
-
+                 
                 // Add labels to display animal details
                 var nameLabel = new Label { Text = $"Name: {animal.Name}", AutoSize = true };
                 var speciesLabel = new Label { Text = $"Species: {animal.Species}", AutoSize = true };
@@ -70,26 +68,15 @@ namespace AdoptMe
                 flowLayoutPanel1.Controls.Add(animalPanel);
             }
         }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            loadAnimals();
-            PopulateAnimalPanels();
-        }
-
-        private void ManagePets_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var addAnimalForm = new ManagePets_Pop(); // Assuming ManageAnimalView is the form for managing animals
-            addAnimalForm.ShowDialog(); // Open as a modal dialog
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

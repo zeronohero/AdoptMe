@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="uiAdmin\Reports\CrystalReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="systemCS\FormManager.cs" />
     <Compile Include="uiAdmin\AdminDash.cs">
       <SubType>Form</SubType>
@@ -99,8 +108,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="objectDB\User.cs" />
     <Compile Include="systemCS\SessionManager.cs" />
+    <Compile Include="uiAdoptee\Pets\PetLists.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="uiAdoptee\Pets\PetLists.Designer.cs">
+      <DependentUpon>PetLists.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uiAdmin\Reports\CrystalReport1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -123,6 +142,9 @@
     <EmbeddedResource Include="uiAdoptee\AdopteeDash.resx">
       <DependentUpon>AdopteeDash.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="uiAdoptee\Pets\PetLists.resx">
+      <DependentUpon>PetLists.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -138,6 +160,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="image\" />
+    <Folder Include="uiAdoptee\Request\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
