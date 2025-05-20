@@ -43,7 +43,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(863, 42);
+            this.panel2.Size = new System.Drawing.Size(1326, 42);
             this.panel2.TabIndex = 1;
             // 
             // panel1
@@ -99,14 +99,14 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(208, 42);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(655, 533);
+            this.panel3.Size = new System.Drawing.Size(1118, 533);
             this.panel3.TabIndex = 3;
             // 
             // AdminDash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(863, 575);
+            this.ClientSize = new System.Drawing.Size(1326, 575);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
