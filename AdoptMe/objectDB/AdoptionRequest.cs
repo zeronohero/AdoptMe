@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace AdoptMe
 {
-    internal class AdoptionRequest
+    public class AdoptionRequest
     {
         public int RequestId { get; set; }
         public int UserId { get; set; }

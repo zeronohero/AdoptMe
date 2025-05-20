@@ -10,16 +10,28 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using AdoptMe.systemCS;
 using System.IO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace AdoptMe.uiAdmin
 {
     public partial class ManagePets_Pop : Form
     {
+        static string default_profile = @"C:\Users\zerxt\source\repos\AdoptMe\AdoptMe\image\Default.png";
+        string  profile_picture = string.Empty;
         public ManagePets_Pop()
         {
             InitializeComponent();
+            pictureBox1.Image = Image.FromFile(default_profile);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
+        private string GenerateUniqueImageName(int userId, string originalFilePath)
+        {
+            string extension = Path.GetExtension(originalFilePath);
+            string date = DateTime.Now.ToString("yyyyMMdd");
+            string random = Guid.NewGuid().ToString("N").Substring(0, 8); // 8-char random string
+            return $"user{userId}_{date}_{random}{extension}";
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             var animal = new Animal(
@@ -29,7 +41,8 @@ namespace AdoptMe.uiAdmin
                 int.Parse(textBox3.Text), // Age
                 comboBox2.SelectedItem.ToString(), // Gender
                 "not_adopted", // Default status
-                Session.CurrentUser.Id
+                Session.CurrentUser.Id,
+                save_image()
             );
 
             animal.SaveToDatabase();
@@ -46,28 +59,42 @@ namespace AdoptMe.uiAdmin
                     open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bpm; *.png;)|*.jpg; *.jpeg; *.gif; *.bpm; *.png;";
                     if (open.ShowDialog() == DialogResult.OK)
                     {
-                        textBox4.Text = open.FileName;
+                        profile_picture = open.FileName;
                         pictureBox1.Image = Image.FromFile(open.FileName);
+                        pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; // Corrected this line
                     }
                 }
-
-            }
-            catch (Exception ex) { 
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                File.Copy(textBox4.Text, Path.Combine(textBox3.Text, @"C:\Users\zerxt\source\repos\AdoptMe\AdoptMe\image", Path.GetFileName(textBox4.Text)));
-                MessageBox.Show("Image have beed posted");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}");
+                MessageBox.Show(ex.Message);
             }
+        }
+        private string save_image()
+        {
+            if (profile_picture == default_profile || string.IsNullOrEmpty(profile_picture))
+            {
+                return default_profile;
+            }
+            else
+            {
+                string imagesDir = @"C:\Users\zerxt\source\repos\AdoptMe\AdoptMe\image";
+                string uniqueFileName = GenerateUniqueImageName(Session.CurrentUser.Id, profile_picture);
+                string destinationPath = Path.Combine(imagesDir, uniqueFileName);
+
+                // Only copy if the file doesn't already exist at the destination
+                if (!File.Exists(destinationPath))
+                {
+                    File.Copy(profile_picture, destinationPath, true);
+                }
+                return destinationPath; 
+            }
+        }
+
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

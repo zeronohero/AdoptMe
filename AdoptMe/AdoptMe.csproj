@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="uiAdmin\Pets\PetPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uiAdmin\Pets\PetPanel.Designer.cs">
+      <DependentUpon>PetPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="uiAdmin\Reports\CrystalReport1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -122,6 +128,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uiAdmin\Pets\PetPanel.resx">
+      <DependentUpon>PetPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="uiAdmin\Reports\CrystalReport1.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

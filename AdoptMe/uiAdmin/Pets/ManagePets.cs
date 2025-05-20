@@ -27,47 +27,58 @@ namespace AdoptMe
         }
 
 
+        //private void PopulateAnimalPanels()
+        //{
+        //    // Clear existing controls in the FlowLayoutPanel
+        //    flowLayoutPanel2.Controls.Clear();
+
+        //    // Loop through the animals list and create panels
+        //    foreach (var animal in animals)
+        //    {
+        //        var animalPanel = new Panel
+        //        {
+        //            Width = 150,
+        //            Height = 200,
+        //            BorderStyle = BorderStyle.FixedSingle
+        //        };
+
+        //        // Add labels to display animal details
+        //        var nameLabel = new Label { Text = $"Name: {animal.Name}", AutoSize = true };
+        //        var speciesLabel = new Label { Text = $"Species: {animal.Species}", AutoSize = true };
+        //        var ageLabel = new Label { Text = $"Age: {animal.Age}", AutoSize = true };
+        //        var colorLabel = new Label { Text = $"Color: {animal.Color}", AutoSize = true };
+        //        var statusLabel = new Label { Text = $"Status: {animal.Status}", AutoSize = true };
+
+
+
+        //        // Arrange labels in the panel
+        //        animalPanel.Controls.Add(nameLabel);
+        //        animalPanel.Controls.Add(speciesLabel);
+        //        animalPanel.Controls.Add(ageLabel);
+        //        animalPanel.Controls.Add(colorLabel);
+        //        animalPanel.Controls.Add(statusLabel);
+
+
+        //        // Adjust label positions
+        //        nameLabel.Location = new System.Drawing.Point(10, 10);
+        //        speciesLabel.Location = new System.Drawing.Point(10, 30);
+        //        ageLabel.Location = new System.Drawing.Point(10, 50);
+        //        colorLabel.Location = new System.Drawing.Point(10, 70);
+        //        statusLabel.Location = new System.Drawing.Point(10, 90);
+
+        //        // Add the panel to the FlowLayoutPanel
+        //        flowLayoutPanel2.Controls.Add(animalPanel);
+        //    }
+        //}
         private void PopulateAnimalPanels()
         {
-            // Clear existing controls in the FlowLayoutPanel
             flowLayoutPanel2.Controls.Clear();
 
-            // Loop through the animals list and create panels
             foreach (var animal in animals)
             {
-                var animalPanel = new Panel
-                {
-                    Width = 150,
-                    Height = 200,
-                    BorderStyle = BorderStyle.FixedSingle
-                };
-
-                // Add labels to display animal details
-                var nameLabel = new Label { Text = $"Name: {animal.Name}", AutoSize = true };
-                var speciesLabel = new Label { Text = $"Species: {animal.Species}", AutoSize = true };
-                var ageLabel = new Label { Text = $"Age: {animal.Age}", AutoSize = true };
-                var colorLabel = new Label { Text = $"Color: {animal.Color}", AutoSize = true };
-                var statusLabel = new Label { Text = $"Status: {animal.Status}", AutoSize = true };
-
-
-
-                // Arrange labels in the panel
-                animalPanel.Controls.Add(nameLabel);
-                animalPanel.Controls.Add(speciesLabel);
-                animalPanel.Controls.Add(ageLabel);
-                animalPanel.Controls.Add(colorLabel);
-                animalPanel.Controls.Add(statusLabel);
-
-
-                // Adjust label positions
-                nameLabel.Location = new System.Drawing.Point(10, 10);
-                speciesLabel.Location = new System.Drawing.Point(10, 30);
-                ageLabel.Location = new System.Drawing.Point(10, 50);
-                colorLabel.Location = new System.Drawing.Point(10, 70);
-                statusLabel.Location = new System.Drawing.Point(10, 90);
-
-                // Add the panel to the FlowLayoutPanel
-                flowLayoutPanel2.Controls.Add(animalPanel);
+                var petPane = new AdoptMe.uiAdmin.Pets.PetPanel();
+                petPane.SetAnimal(animal);
+                flowLayoutPanel2.Controls.Add(petPane);
             }
         }
 

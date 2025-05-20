@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace AdoptMe
 {
-    internal class Admin : User
+    public class Admin : User
     {
         public Admin(int id, string email, string password, string name, string number, string address) :
             base(id, email, password, Role.Admin, name, number, address){} 
