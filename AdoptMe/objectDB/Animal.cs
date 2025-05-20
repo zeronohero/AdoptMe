@@ -19,18 +19,18 @@ namespace AdoptMe
         public string Status { get; set; } // 'adopted' or 'not_adopted'  
         public int Admin_id { get; set; } // Admin ID  
         public int? Adoptee_id { get; set; } // Adoptee ID or null  
-        public string Image { get; set; }
 
-        public Animal(
+        public Animal // WARNING: Database Insert only  
+                      //dont need to implicitly insert an id  
+            (
             string name,
             string species,
             string color,
             int age,
             string gender,
             string status,
-            int admin_id,
-            string image // nullable
-        )
+            int admin_id
+            )
         {
             Name = name;
             Species = species;
@@ -39,7 +39,6 @@ namespace AdoptMe
             Gender = gender;
             Status = status;
             Admin_id = admin_id;
-            Image = image;
         }
 
         public Animal // Complete Detail  

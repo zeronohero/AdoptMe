@@ -30,7 +30,7 @@ namespace AdoptMe
         private void PopulateAnimalPanels()
         {
             // Clear existing controls in the FlowLayoutPanel
-            flowLayoutPanel1.Controls.Clear();
+            flowLayoutPanel2.Controls.Clear();
 
             // Loop through the animals list and create panels
             foreach (var animal in animals)
@@ -67,14 +67,10 @@ namespace AdoptMe
                 statusLabel.Location = new System.Drawing.Point(10, 90);
 
                 // Add the panel to the FlowLayoutPanel
-                flowLayoutPanel1.Controls.Add(animalPanel);
+                flowLayoutPanel2.Controls.Add(animalPanel);
             }
         }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            loadAnimals();
-            PopulateAnimalPanels();
-        }
+
 
         private void ManagePets_Load(object sender, EventArgs e)
         {
@@ -84,6 +80,12 @@ namespace AdoptMe
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            loadAnimals();
+            PopulateAnimalPanels();
         }
 
         private void button1_Click(object sender, EventArgs e)

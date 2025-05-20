@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using AdoptMe.uiAdoptee;
+using AdoptMe.uiAdoptee.Request;
 
 namespace AdoptMe
 {
@@ -30,6 +31,11 @@ namespace AdoptMe
         {
             LoadFormInPanel(new PetLists());
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            LoadFormInPanel(new RequestLists());
         }
     }
 }
