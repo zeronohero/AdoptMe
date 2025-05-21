@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AdoptMe.systemCS;
 
 namespace AdoptMe.uiAdmin.Request
 {
@@ -16,11 +17,13 @@ namespace AdoptMe.uiAdmin.Request
         {
             InitializeComponent();
         }
+        public AdoptionRequest req;
         public ProcessRequest(AdoptionRequest req)
         {
             InitializeComponent();
 
             // Get animal details
+            this.req = req;
             Animal animal = Animal.GetAnimalById(req.AnimalId);
             if (animal != null)
             {
@@ -57,5 +60,39 @@ namespace AdoptMe.uiAdmin.Request
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Approve
+            try
+            {
+                int adminId = Session.CurrentUser.Id;
+                AdoptionRequest.ApproveRequest(req.RequestId, adminId);
+                MessageBox.Show("Request approved.");
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to approve: {ex.Message}");
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // Deny
+            try
+            {
+                int adminId = Session.CurrentUser.Id;
+                AdoptionRequest.DenyRequest(req.RequestId, adminId);
+                MessageBox.Show("Request denied.");
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to deny: {ex.Message}");
+            }
+        }
     }
 }
+

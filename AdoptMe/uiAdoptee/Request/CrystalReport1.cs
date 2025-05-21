@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdoptMe.uiAdmin.Reports {
+namespace AdoptMe.uiAdoptee.Request {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -41,7 +41,7 @@ namespace AdoptMe.uiAdmin.Reports {
         
         public override string FullResourceName {
             get {
-                return "AdoptMe.uiAdmin.Reports.CrystalReport1.rpt";
+                return "AdoptMe.uiAdoptee.Request.CrystalReport1.rpt";
             }
             set {
                 // Do nothing
@@ -85,14 +85,6 @@ namespace AdoptMe.uiAdmin.Reports {
         public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
                 return this.ReportDefinition.Sections[4];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_My_Parameter {
-            get {
-                return this.DataDefinition.ParameterFields[0];
             }
         }
     }

@@ -17,8 +17,10 @@ namespace AdoptMe
         public ManagePets()
         {
             InitializeComponent();
+            comboBox2.SelectedIndexChanged += (s, e) => FilterAndDisplayAnimals();
+            textBox1.TextChanged += (s, e) => FilterAndDisplayAnimals();
             loadAnimals();
-            PopulateAnimalPanels();
+            FilterAndDisplayAnimals();
         }
 
         private void loadAnimals()
@@ -26,50 +28,6 @@ namespace AdoptMe
             animals = Animal.GetAllAnimals();
         }
 
-
-        //private void PopulateAnimalPanels()
-        //{
-        //    // Clear existing controls in the FlowLayoutPanel
-        //    flowLayoutPanel2.Controls.Clear();
-
-        //    // Loop through the animals list and create panels
-        //    foreach (var animal in animals)
-        //    {
-        //        var animalPanel = new Panel
-        //        {
-        //            Width = 150,
-        //            Height = 200,
-        //            BorderStyle = BorderStyle.FixedSingle
-        //        };
-
-        //        // Add labels to display animal details
-        //        var nameLabel = new Label { Text = $"Name: {animal.Name}", AutoSize = true };
-        //        var speciesLabel = new Label { Text = $"Species: {animal.Species}", AutoSize = true };
-        //        var ageLabel = new Label { Text = $"Age: {animal.Age}", AutoSize = true };
-        //        var colorLabel = new Label { Text = $"Color: {animal.Color}", AutoSize = true };
-        //        var statusLabel = new Label { Text = $"Status: {animal.Status}", AutoSize = true };
-
-
-
-        //        // Arrange labels in the panel
-        //        animalPanel.Controls.Add(nameLabel);
-        //        animalPanel.Controls.Add(speciesLabel);
-        //        animalPanel.Controls.Add(ageLabel);
-        //        animalPanel.Controls.Add(colorLabel);
-        //        animalPanel.Controls.Add(statusLabel);
-
-
-        //        // Adjust label positions
-        //        nameLabel.Location = new System.Drawing.Point(10, 10);
-        //        speciesLabel.Location = new System.Drawing.Point(10, 30);
-        //        ageLabel.Location = new System.Drawing.Point(10, 50);
-        //        colorLabel.Location = new System.Drawing.Point(10, 70);
-        //        statusLabel.Location = new System.Drawing.Point(10, 90);
-
-        //        // Add the panel to the FlowLayoutPanel
-        //        flowLayoutPanel2.Controls.Add(animalPanel);
-        //    }
-        //}
         private void PopulateAnimalPanels()
         {
             flowLayoutPanel2.Controls.Clear();
@@ -82,27 +40,50 @@ namespace AdoptMe
             }
         }
 
-
-        private void ManagePets_Load(object sender, EventArgs e)
+        private void FilterAndDisplayAnimals()
         {
+            IEnumerable<Animal> filtered = animals;
 
-        }
+            string selectedSpecies = comboBox2.SelectedItem?.ToString();
+            if (!string.IsNullOrEmpty(selectedSpecies) && selectedSpecies != "All")
+            {
+                filtered = filtered.Where(a => a.Species.Equals(selectedSpecies, StringComparison.OrdinalIgnoreCase));
+            }
 
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
+            string searchText = textBox1.Text?.Trim();
+            if (!string.IsNullOrEmpty(searchText) && searchText != "search")
+            {
+                filtered = filtered.Where(a => a.Name.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
 
+            flowLayoutPanel2.Controls.Clear();
+            foreach (var animal in filtered)
+            {
+                var petPane = new uiAdmin.Pets.PetPanel();
+                petPane.SetAnimal(animal);
+                flowLayoutPanel2.Controls.Add(petPane);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             loadAnimals();
-            PopulateAnimalPanels();
+            FilterAndDisplayAnimals();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var addAnimalForm = new ManagePets_Pop(); // Assuming ManageAnimalView is the form for managing animals
-            addAnimalForm.ShowDialog(); // Open as a modal dialog
+            var addAnimalForm = new ManagePets_Pop();
+            if (addAnimalForm.ShowDialog() == DialogResult.OK)
+            {
+                loadAnimals();
+                FilterAndDisplayAnimals();
+            }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

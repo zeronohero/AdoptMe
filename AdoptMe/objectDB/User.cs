@@ -28,6 +28,17 @@ namespace AdoptMe
             this.IsRole = isRole;
             this.Name = name;
             this.Number = number;
+            this.Address = address;
+        }
+
+        public User(string email, string password, Role isRole, string name, string number, string address)
+        {
+            this.Email = email;
+            this.Password = password;
+            this.IsRole = isRole;
+            this.Name = name;
+            this.Number = number;
+            this.Address = address;
         }
     }
 

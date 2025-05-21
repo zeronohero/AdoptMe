@@ -50,6 +50,21 @@ namespace AdoptMe
             conn.Open();
             return cmd.ExecuteReader(CommandBehavior.CloseConnection);
         }
+
+        public static DataTable ExecuteDataTable(string query, SqlParameter[] parameters)
+        {
+            using (SqlConnection conn = GetConnection())
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddRange(parameters);
+                using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                {
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    return dt;
+                }
+            }
+        }
     }
 }
 

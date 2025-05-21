@@ -16,11 +16,15 @@ namespace AdoptMe.uiAdmin
 {
     public partial class ManagePets_Pop : Form
     {
-        static string default_profile = @"C:\Users\zerxt\source\repos\AdoptMe\AdoptMe\image\Default.png";
-        string  profile_picture = string.Empty;
+        static string imagesDir = Directory.GetParent(Application.StartupPath).Parent.FullName;
+        static string default_profile = Path.Combine(imagesDir, "image", "Default.png");
+
+        string profile_picture = string.Empty;
         public ManagePets_Pop()
         {
             InitializeComponent();
+            Directory.CreateDirectory(Path.Combine(Application.StartupPath, "image"));
+
             pictureBox1.Image = Image.FromFile(default_profile);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
@@ -47,6 +51,7 @@ namespace AdoptMe.uiAdmin
 
             animal.SaveToDatabase();
             MessageBox.Show("Animal added successfully!");
+            this.DialogResult = DialogResult.OK; // <-- Add this line
             this.Close();
         }
 
@@ -78,7 +83,6 @@ namespace AdoptMe.uiAdmin
             }
             else
             {
-                string imagesDir = @"C:\Users\zerxt\source\repos\AdoptMe\AdoptMe\image";
                 string uniqueFileName = GenerateUniqueImageName(Session.CurrentUser.Id, profile_picture);
                 string destinationPath = Path.Combine(imagesDir, uniqueFileName);
 

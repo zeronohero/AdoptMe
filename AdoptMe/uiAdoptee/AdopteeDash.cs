@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using AdoptMe.systemCS;
 using AdoptMe.uiAdoptee;
 using AdoptMe.uiAdoptee.Request;
 
@@ -36,6 +37,21 @@ namespace AdoptMe
         private void button2_Click(object sender, EventArgs e)
         {
             LoadFormInPanel(new RequestLists());
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to logout?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Session.Logout();
+                // Show login form
+                var loginForm = new Form1();
+                loginForm.Show();
+                this.FormClosed -= Closed; // Prevent Application.Exit()
+                this.Close();
+            }
         }
     }
 }

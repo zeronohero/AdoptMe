@@ -50,6 +50,7 @@
             this.button1.TabIndex = 17;
             this.button1.Text = "Aprove";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label6
             // 
@@ -139,6 +140,7 @@
             this.button2.TabIndex = 20;
             this.button2.Text = "Deny";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // ProcessRequest
             // 

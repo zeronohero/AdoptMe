@@ -162,6 +162,17 @@ namespace AdoptMe
             }
             return null;
         }
+        public static void UpdateStatus(int animalId, string status, int? adopteeId = null)
+        {
+            string query = "UPDATE Animal SET status = @status, adoptee_id = @adopteeId WHERE animal_id = @id";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+        new SqlParameter("@status", status),
+        new SqlParameter("@adopteeId", (object)adopteeId ?? DBNull.Value),
+        new SqlParameter("@id", animalId)
+            };
+            DatabaseConnection.ExecuteNonQuery(query, parameters);
+        }
 
     }
 }

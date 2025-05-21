@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace AdoptMe
@@ -57,6 +58,20 @@ namespace AdoptMe
         // Helper method to update status and processed_by
         private static void UpdateRequestStatus(int requestId, string status, int adminId)
         {
+            // Get the animalId and userId for this request
+            string selectQuery = "SELECT animal_id, user_id FROM AdoptionRequest WHERE request_id = @requestId";
+            SqlParameter[] selectParams = { new SqlParameter("@requestId", requestId) };
+            int animalId = 0;
+            int userId = 0;
+            using (var reader = DatabaseConnection.ExecuteReader(selectQuery, selectParams))
+            {
+                if (reader.Read())
+                {
+                    animalId = reader.GetInt32(0);
+                    userId = reader.GetInt32(1);
+                }
+            }
+
             string query = @"UPDATE AdoptionRequest
                      SET request_status = @status, 
                          processed_by = @adminId,
@@ -65,14 +80,24 @@ namespace AdoptMe
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-        new SqlParameter("@status", status),
-        new SqlParameter("@adminId", adminId),
-        new SqlParameter("@processedAt", DateTime.Now),
-        new SqlParameter("@requestId", requestId)
+                new SqlParameter("@status", status),
+                new SqlParameter("@adminId", adminId),
+                new SqlParameter("@processedAt", DateTime.Now),
+                new SqlParameter("@requestId", requestId)
             };
 
             DatabaseConnection.ExecuteNonQuery(query, parameters);
+
+            if (status == "Approved")
+            {
+                Animal.UpdateStatus(animalId, "adopted", userId);
+            }
+            else if (status == "Deny")
+            {
+                Animal.UpdateStatus(animalId, "not_adopted", null);
+            }
         }
+
 
 
         public static List<AdoptionRequest> GetAllRequests()
@@ -128,6 +153,33 @@ namespace AdoptMe
             return requests;
         }
 
+        public static DataTable GetAdoptionRequestsWithNames(int userId, int requestId)
+        {
+            string query = @"
+                SELECT 
+                    ar.request_id,
+                    ar.user_id,
+                    ar.animal_id,
+                    ar.information,
+                    ar.processed_by,
+                    ar.request_status,
+                    ar.created_at,
+                    ar.processed_at,
+                    a_admin.name AS admin_name,
+                    adoptee.name AS adoptee_name,
+                    animal.name AS animal_name
+                FROM AdoptionRequest ar
+                LEFT JOIN Admin a_admin ON ar.processed_by = a_admin.admin_id
+                LEFT JOIN Adoptee adoptee ON ar.user_id = adoptee.adoptee_id
+                LEFT JOIN Animal animal ON ar.animal_id = animal.animal_id
+                WHERE ar.user_id = @userId AND ar.request_id = @requestId
+            ";
+            SqlParameter[] parameters = {
+        new SqlParameter("@userId", userId),
+        new SqlParameter("@requestId", requestId)
+    };
+            return DatabaseConnection.ExecuteDataTable(query, parameters);
+        }
 
 
     }

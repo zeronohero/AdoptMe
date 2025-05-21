@@ -16,50 +16,51 @@ namespace AdoptMe.uiAdmin.Request
         public RequestPanel()
         {
             InitializeComponent();
-            button1.Click += button1_Click;
-
         }
         private AdoptionRequest request;
 
         // Event to notify parent to process this request
         public event EventHandler<AdoptionRequest> ProcessRequested;
 
-        public void SetRequest(AdoptionRequest req)
+        public void SetRequest(AdoptionRequest request)
         {
-            this.request = req; // <-- This line ensures the correct request is used
-
-            // Get animal details
-            Animal animal = Animal.GetAnimalById(req.AnimalId);
-            if (animal != null)
+            this.request = request;
+            string animalName = AdoptMe.Animal.GetUserNameById(request.AnimalId) ?? $"Animal ID: {request.AnimalId}";
+            label2.Text = $"Animal: {animalName}";
+            label3.Text = $"Status: {request.RequestStatus}";
+            label4.Text = $"Date: {request.CreatedAt}";
+            label5.Text = request.ProcessedAt.HasValue ? $"Processed: {request.ProcessedAt}" : "Not processed";
+            if (request.RequestStatus == "Deny" || request.RequestStatus == "Approved")
             {
-                label1.Text = $"Animal: {animal.Name}";
-                label2.Text = $"Species: {animal.Species}";
-                label3.Text = $"Color: {animal.Color}";
-                label4.Text = $"Gender: {animal.Gender}";
-                label5.Text = $"Status: {animal.Status}";
-                if (!string.IsNullOrEmpty(animal.Image) && System.IO.File.Exists(animal.Image))
-                {
-                    pictureBox1.Image = Image.FromFile(animal.Image);
-                    pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                }
-                else
-                {
-                    pictureBox1.Image = null;
-                }
+                label6.Text = $"Proccessed By: {Admin.GetUserNameById((int)request.ProcessedBy)}";
             }
             else
             {
-                label1.Text = "Animal: [Unknown]";
+                label6.Text = "";
             }
+            pictureBox1.Image = Image.FromFile(Animal.GetImageById(request.AnimalId));
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            // Get Adoptee name
-            string adopteeName = Adoptee.GetUserNameById(req.UserId) ?? $"User ID: {req.UserId}";
-            label6.Text = $"Requested by: {adopteeName}";
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ProcessRequested?.Invoke(this, request);
+            if (request == null)
+            {
+                MessageBox.Show("No request selected.");
+                return;
+            }
+
+            using (var processForm = new ProcessRequest(request))
+            {
+                var result = processForm.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    // Optionally refresh or update UI after processing
+                    SetRequest(request); // Refresh the panel with updated info
+                }
+            }
         }
     }
 }

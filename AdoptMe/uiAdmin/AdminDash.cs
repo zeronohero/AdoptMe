@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AdoptMe.systemCS;
 
 namespace AdoptMe.uiAdmin
 {
@@ -45,6 +46,21 @@ namespace AdoptMe.uiAdmin
         private void button3_Click(object sender, EventArgs e)
         {
             LoadFormInPanel(new ManageReports());
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to logout?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Session.Logout();
+                // Show login form
+                var loginForm = new Form1();
+                loginForm.Show();
+                this.FormClosed -= Closed; // Prevent Application.Exit()
+                this.Close();
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AdoptMe.systemCS;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace AdoptMe.uiAdoptee
 {
@@ -17,37 +18,47 @@ namespace AdoptMe.uiAdoptee
         public PetLists()
         {
             InitializeComponent();
+            comboBox1.SelectedIndexChanged += (s, e) => FilterAndDisplayAnimals();
+            textBox1.TextChanged += (s, e) => FilterAndDisplayAnimals();
             loadAnimals();
-            PopulateAnimalPanels();
+            FilterAndDisplayAnimals();
         }
         private void loadAnimals()
         {
-            animals = Animal.GetAllAnimals();
-            animals.Where(a => a.Status.Contains("not_adopted"));
+            animals = Animal.GetAllAnimals()
+                            .Where(a => a.Status.Contains("not_adopted"))
+                            .ToList();
         }
 
-        private void PopulateAnimalPanels()
+        private void FilterAndDisplayAnimals()
         {
-            flowLayoutPanel2.Controls.Clear();
+            IEnumerable<Animal> filtered = animals;
 
-            foreach (var animal in animals)
+            string selectedSpecies = comboBox1.SelectedItem?.ToString();
+            if (!string.IsNullOrEmpty(selectedSpecies) && selectedSpecies != "All")
             {
-                var petPanel = new AdoptMe.uiAdoptee.Pets.PetPanel();
-                petPanel.SetAnimal(animal);
-                flowLayoutPanel2.Controls.Add(petPanel);
+                filtered = filtered.Where(a => a.Species.Equals(selectedSpecies, StringComparison.OrdinalIgnoreCase));
+            }
+
+            string searchText = textBox1.Text?.Trim();
+            if (!string.IsNullOrEmpty(searchText) && searchText != "search")
+            {
+                filtered = filtered.Where(a => a.Name.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            flowLayoutPanel2.Controls.Clear();
+            foreach (var animal in filtered)
+            {
+                var petPane = new uiAdoptee.Pets.PetPanel();
+                petPane.SetAnimal(animal);
+                flowLayoutPanel2.Controls.Add(petPane);
             }
         }
 
-
-
         private void button1_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
+            loadAnimals();
+            FilterAndDisplayAnimals();
         }
     }
 }

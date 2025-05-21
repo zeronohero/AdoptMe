@@ -15,10 +15,14 @@ namespace AdoptMe.uiAdoptee.Request
         public RequestPane()
         {
             InitializeComponent();
+            button1.Hide();
         }
+        AdoptionRequest request;
 
         public void SetRequest(AdoptionRequest request)
         {
+            this.request = request;
+
             string animalName = AdoptMe.Animal.GetUserNameById(request.AnimalId) ?? $"Animal ID: {request.AnimalId}";
             label2.Text = $"Animal: {animalName}";
             label3.Text = $"Status: {request.RequestStatus}";
@@ -32,9 +36,32 @@ namespace AdoptMe.uiAdoptee.Request
             {
                 label6.Text = "";
             }
-                pictureBox1.Image = Image.FromFile(Animal.GetImageById(request.AnimalId));
+            pictureBox1.Image = Image.FromFile(Animal.GetImageById(request.AnimalId));
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            if (request.RequestStatus == "Approved")
+            {
+                button1.Show();
+            }
+            
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (request != null)
+            {
+                // Assuming you have a UserId stored somewhere; replace 0 with actual user ID if available
+                int userId = request.UserId; // Ensure your AdoptionRequest class has this property
+                int requestId = request.RequestId;
+
+                ReportDoc reportForm = new ReportDoc();
+                reportForm.LoadReport(userId, requestId);
+                reportForm.Show();
+            }
+            else
+            {
+                MessageBox.Show("No request selected to generate report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

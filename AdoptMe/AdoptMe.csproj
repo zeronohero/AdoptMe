@@ -34,10 +34,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportAppServer.Controllers, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="System" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +57,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Register.Designer.cs">
+      <DependentUpon>Register.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uiAdmin\Reports\CrystalReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="uiAdoptee\Request\CrystalReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="uiAdmin\Request\ProcessRequest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,12 +103,6 @@
     </Compile>
     <Compile Include="uiAdmin\Pets\PetPanel.Designer.cs">
       <DependentUpon>PetPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="uiAdmin\Reports\CrystalReport1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CrystalReport1.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="systemCS\FormManager.cs" />
     <Compile Include="uiAdmin\AdminDash.cs">
@@ -144,6 +169,13 @@
     <Compile Include="uiAdoptee\Pets\PetPanel.Designer.cs">
       <DependentUpon>PetPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="uiAdoptee\Request\ReportDoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="uiAdoptee\Request\.Designer.cs">
+      <DependentUpon>ReportDoc.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="uiAdoptee\Request\RequestLists.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,12 +191,11 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Register.resx">
+      <DependentUpon>Register.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="uiAdmin\Pets\PetPanel.resx">
       <DependentUpon>PetPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="uiAdmin\Reports\CrystalReport1.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -183,6 +214,17 @@
     </EmbeddedResource>
     <EmbeddedResource Include="uiAdmin\Pets\ManagePets_Pop.resx">
       <DependentUpon>ManagePets_Pop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uiAdmin\Reports\CrystalReport1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uiAdmin\Reports\ManageReports.resx">
+      <DependentUpon>ManageReports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uiAdoptee\Request\CrystalReport1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="uiAdmin\Request\ManageRequest.resx">
       <DependentUpon>ManageRequest.cs</DependentUpon>
@@ -205,12 +247,26 @@
     <EmbeddedResource Include="uiAdoptee\Pets\RequestForm.resx">
       <DependentUpon>RequestForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="uiAdoptee\Request\ReportDoc.resx">
+      <DependentUpon>ReportDoc.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="uiAdoptee\Request\RequestLists.resx">
       <DependentUpon>RequestLists.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="uiAdoptee\Request\RequestPane.resx">
       <DependentUpon>RequestPane.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

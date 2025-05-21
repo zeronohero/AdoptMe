@@ -47,6 +47,16 @@ namespace AdoptMe
             this.Hide();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            using (var registerForm = new Register())
+            {
+                if (registerForm.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("Registration successful! Please log in.");
+                }
+            }
+        }
     }
 
 }
