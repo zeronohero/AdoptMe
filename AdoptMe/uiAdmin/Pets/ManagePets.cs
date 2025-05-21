@@ -76,7 +76,7 @@ namespace AdoptMe
 
             foreach (var animal in animals)
             {
-                var petPane = new AdoptMe.uiAdmin.Pets.PetPanel();
+                var petPane = new uiAdmin.Pets.PetPanel();
                 petPane.SetAnimal(animal);
                 flowLayoutPanel2.Controls.Add(petPane);
             }

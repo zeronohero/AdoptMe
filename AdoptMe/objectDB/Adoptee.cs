@@ -29,5 +29,12 @@ namespace AdoptMe
 
             DatabaseConnection.ExecuteNonQuery(query, parameters);
         }
+        public static string GetUserNameById(int userId)
+        {
+            string query = "SELECT name FROM [Adoptee] WHERE adoptee_id = @id";
+            SqlParameter[] parameters = { new SqlParameter("@id", userId) };
+            object result = DatabaseConnection.ExecuteScalar(query, parameters);
+            return result != null ? result.ToString() : null;
+        }
     }
 }

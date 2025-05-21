@@ -119,6 +119,13 @@ namespace AdoptMe
             }
             return animals;
         }
+        public static string GetUserNameById(int userId)
+        {
+            string query = "SELECT name FROM [Animal] WHERE animal_id = @id";
+            SqlParameter[] parameters = { new SqlParameter("@id", userId) };
+            object result = DatabaseConnection.ExecuteScalar(query, parameters);
+            return result != null ? result.ToString() : null;
+        }
     }
 }
 
