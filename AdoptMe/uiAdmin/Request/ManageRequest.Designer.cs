@@ -42,6 +42,9 @@
             // 
             // flowLayoutPanel2
             // 
+            this.flowLayoutPanel2.AutoScroll = true;
+            this.flowLayoutPanel2.AutoSize = true;
+            this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 100);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -58,6 +61,7 @@
             this.Name = "ManageRequest";
             this.Text = "ManageRequest";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

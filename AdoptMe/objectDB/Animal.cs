@@ -126,6 +126,43 @@ namespace AdoptMe
             object result = DatabaseConnection.ExecuteScalar(query, parameters);
             return result != null ? result.ToString() : null;
         }
+        public static string GetImageById(int userId)
+        {
+            string query = "SELECT image FROM [Animal] WHERE animal_id = @id";
+            SqlParameter[] parameters = { new SqlParameter("@id", userId) };
+            object result = DatabaseConnection.ExecuteScalar(query, parameters);
+            return result != null ? result.ToString() : null;
+        }
+        public static Animal GetAnimalById(int animalId)
+        {
+            string query = @"SELECT animal_id, name, species, color, age, gender, status, admin_id, adoptee_id, image, created_at, adopted_at 
+                     FROM Animal WHERE animal_id = @id";
+            SqlParameter[] parameters = { new SqlParameter("@id", animalId) };
+            using (SqlDataReader reader = DatabaseConnection.ExecuteReader(query, parameters))
+            {
+                if (reader.Read())
+                {
+                    int animal_id = reader.GetInt32(0);
+                    string name = reader.GetString(1);
+                    string species = reader.GetString(2);
+                    string color = reader.GetString(3);
+                    int age = reader.GetInt32(4);
+                    string gender = reader.GetString(5);
+                    string status = reader.GetString(6);
+                    int admin_id = reader.GetInt32(7);
+                    int? adoptee_id = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8);
+                    string image = reader.IsDBNull(9) ? null : reader.GetString(9);
+                    DateTime created_at = reader.GetDateTime(10);
+                    DateTime? adopted_at = reader.IsDBNull(11) ? (DateTime?)null : reader.GetDateTime(11);
+
+                    return new Animal(
+                        animal_id, name, species, color, age, gender, status, admin_id, adoptee_id, image, created_at, adopted_at
+                    );
+                }
+            }
+            return null;
+        }
+
     }
 }
 

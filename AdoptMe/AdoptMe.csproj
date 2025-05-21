@@ -49,6 +49,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="uiAdmin\Request\ProcessRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="uiAdmin\Request\ProcessRequest.Designer.cs">
+      <DependentUpon>ProcessRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uiAdmin\Request\RequestPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uiAdmin\Request\RequestPanel.Designer.cs">
+      <DependentUpon>RequestPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uiAdoptee\Pets\RequestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="uiAdoptee\Pets\RequestForm.Designer.cs">
+      <DependentUpon>RequestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="uiAdmin\Pets\PetPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -132,6 +150,12 @@
     <Compile Include="uiAdoptee\Request\RequestLists.Designer.cs">
       <DependentUpon>RequestLists.cs</DependentUpon>
     </Compile>
+    <Compile Include="uiAdoptee\Request\RequestPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uiAdoptee\Request\RequestPane.Designer.cs">
+      <DependentUpon>RequestPane.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -163,6 +187,12 @@
     <EmbeddedResource Include="uiAdmin\Request\ManageRequest.resx">
       <DependentUpon>ManageRequest.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="uiAdmin\Request\ProcessRequest.resx">
+      <DependentUpon>ProcessRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uiAdmin\Request\RequestPanel.resx">
+      <DependentUpon>RequestPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="uiAdoptee\AdopteeDash.resx">
       <DependentUpon>AdopteeDash.cs</DependentUpon>
     </EmbeddedResource>
@@ -172,8 +202,14 @@
     <EmbeddedResource Include="uiAdoptee\Pets\PetPanel.resx">
       <DependentUpon>PetPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="uiAdoptee\Pets\RequestForm.resx">
+      <DependentUpon>RequestForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="uiAdoptee\Request\RequestLists.resx">
       <DependentUpon>RequestLists.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uiAdoptee\Request\RequestPane.resx">
+      <DependentUpon>RequestPane.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

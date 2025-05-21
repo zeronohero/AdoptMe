@@ -13,6 +13,7 @@ namespace AdoptMe
         public int? ProcessedBy { get; set; }
         public string RequestStatus { get; set; }
         public DateTime CreatedAt { get; set; }
+        public DateTime? ProcessedAt { get; set; }
 
         public AdoptionRequest(int userId, int animalId, string information, string requestStatus = "Pending", int? processedBy = null)
         {
@@ -57,23 +58,27 @@ namespace AdoptMe
         private static void UpdateRequestStatus(int requestId, string status, int adminId)
         {
             string query = @"UPDATE AdoptionRequest
-                             SET request_status = @status, processed_by = @adminId
-                             WHERE request_id = @requestId";
+                     SET request_status = @status, 
+                         processed_by = @adminId,
+                         processed_at = @processedAt
+                     WHERE request_id = @requestId";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@status", status),
-                new SqlParameter("@adminId", adminId),
-                new SqlParameter("@requestId", requestId)
+        new SqlParameter("@status", status),
+        new SqlParameter("@adminId", adminId),
+        new SqlParameter("@processedAt", DateTime.Now),
+        new SqlParameter("@requestId", requestId)
             };
 
             DatabaseConnection.ExecuteNonQuery(query, parameters);
         }
 
+
         public static List<AdoptionRequest> GetAllRequests()
         {
             var requests = new List<AdoptionRequest>();
-            string query = @"SELECT request_id, user_id, animal_id, information, processed_by, request_status, created_at FROM AdoptionRequest";
+            string query = @"SELECT request_id, user_id, animal_id, information, processed_by, request_status, created_at, processed_at FROM AdoptionRequest";
             using (SqlDataReader reader = DatabaseConnection.ExecuteReader(query, new SqlParameter[] { }))
             {
                 while (reader.Read())
@@ -87,6 +92,7 @@ namespace AdoptMe
                     );
                     request.RequestId = reader.GetInt32(0);
                     request.CreatedAt = reader.GetDateTime(6);
+                    request.ProcessedAt = reader.IsDBNull(7) ? (DateTime?)null : reader.GetDateTime(7); // <-- handle nullable
                     requests.Add(request);
                 }
             }
@@ -95,7 +101,7 @@ namespace AdoptMe
         public static List<AdoptionRequest> GetCurrentUserRequests(int userId)
         {
             var requests = new List<AdoptionRequest>();
-            string query = @"SELECT request_id, user_id, animal_id, information, processed_by, request_status, created_at 
+            string query = @"SELECT request_id, user_id, animal_id, information, processed_by, request_status, created_at, processed_at 
                      FROM AdoptionRequest
                      WHERE user_id = @user_id";
             SqlParameter[] parameters = new SqlParameter[]
@@ -115,6 +121,7 @@ namespace AdoptMe
                     );
                     request.RequestId = reader.GetInt32(0);
                     request.CreatedAt = reader.GetDateTime(6);
+                    request.ProcessedAt = reader.IsDBNull(7) ? (DateTime?)null : reader.GetDateTime(7);
                     requests.Add(request);
                 }
             }

@@ -23,7 +23,7 @@ namespace AdoptMe.uiAdoptee.Pets
             label2.Text = animal.Color;
             label3.Text = animal.Gender;
             label4.Text = animal.Species;
-            label5.Text = "" + animal.Date_added;
+            label5.Text = $"{animal.Date_added:yyyy-MM-dd}";
             pictureBox1.Image = Image.FromFile(animal.Image);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
@@ -35,26 +35,16 @@ namespace AdoptMe.uiAdoptee.Pets
         {
             if (this.Tag is Animal animal)
             {
-                try
+                using (var requestForm = new AdoptMe.RequestForm(animal))
                 {
-                    int userId = Session.CurrentUser.Id;
-                    int animalId = animal.Animal_id;
-                    string information = $"Request to adopt {animal.Name} ({animal.Species})";
-                    var request = new AdoptMe.AdoptionRequest(
-                        userId,
-                        animalId,
-                        information,
-                        "Pending"
-                    );
-                    request.SaveToDatabase();
-                    MessageBox.Show($"Adoption request sent for {animal.Name}");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Failed to send adoption request: {ex.Message}");
+                    if (requestForm.ShowDialog() == DialogResult.OK)
+                    {
+                        // Optionally, refresh the UI or show a confirmation message
+                    }
                 }
             }
         }
+
 
     }
 }
